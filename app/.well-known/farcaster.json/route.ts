@@ -4,9 +4,11 @@ const BASE_URL = "https://natillera-frame.vercel.app";
 
 const manifest = {
   accountAssociation: {
-    header: process.env.FARCASTER_MANIFEST_HEADER ?? "",
-    payload: process.env.FARCASTER_MANIFEST_PAYLOAD ?? "",
-    signature: process.env.FARCASTER_MANIFEST_SIGNATURE ?? "",
+    header:
+      "eyJmaWQiOjExNzg3OTgsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhlMTdGMEQxRDA3RjlDYThFNTQzNTIyQjQ0MjcyMjc4MEM1OTNENmM4In0",
+    payload: "eyJkb21haW4iOiJuYXRpbGxlcmEtZnJhbWUudmVyY2VsLmFwcCJ9",
+    signature:
+      "tA2a8ukj8zsut8psMw0XzErmfBNkY8Yskzvr1NmJ4SUvbrpQtHROSFp7VPneC7yWZR8o5Dx0QFB0801OO+KnjRw=",
   },
   frame: {
     version: "1",
