@@ -14,7 +14,7 @@ const manifest = {
     version: "1",
     name: "Natillera On-Chain",
     iconUrl: `${BASE_URL}/icon.png`,
-    homeUrl: `${BASE_URL}/frames`,
+    homeUrl: BASE_URL,
     imageUrl: `${BASE_URL}/og-image.png`,
     subtitle: "Ahorro rotativo en Celo",
     description:
