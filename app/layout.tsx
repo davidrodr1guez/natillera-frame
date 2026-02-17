@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import FarcasterInit from "./components/FarcasterInit";
 
 export const metadata: Metadata = {
   title: "Natillera On-Chain - Farcaster Frame",
@@ -12,7 +13,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body style={{ margin: 0 }}>{children}</body>
+      <body style={{ margin: 0 }}>
+        <FarcasterInit />
+        {children}
+      </body>
     </html>
   );
 }
