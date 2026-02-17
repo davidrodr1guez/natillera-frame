@@ -1,27 +1,28 @@
-import { fetchMetadata } from "frames.js/next";
 import type { Metadata } from "next";
 import { NATILLERAS } from "@/lib/natilleras";
 
-export const dynamic = "force-dynamic";
+const BASE_URL = "https://natillera-frame.vercel.app";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000";
-
-  let frameMetadata = {};
-  try {
-    frameMetadata = await fetchMetadata(new URL("/frames", baseUrl));
-  } catch {
-    // During build the server isn't running — skip
-  }
-
-  return {
-    title: "Natillera On-Chain | Farcaster Frame",
-    description: "Ahorro rotativo descentralizado en Celo",
-    other: frameMetadata,
-  };
-}
+export const metadata: Metadata = {
+  title: "Natillera On-Chain | Farcaster Frame",
+  description: "Ahorro rotativo descentralizado en Celo",
+  other: {
+    "fc:frame": JSON.stringify({
+      version: "next",
+      imageUrl: `${BASE_URL}/og-image.png`,
+      button: {
+        title: "Abrir Natillera",
+        action: {
+          type: "launch_frame",
+          name: "Natillera On-Chain",
+          url: BASE_URL,
+          splashImageUrl: `${BASE_URL}/splash.png`,
+          splashBackgroundColor: "#0a0f1a",
+        },
+      },
+    }),
+  },
+};
 
 export default function Page() {
   return (
