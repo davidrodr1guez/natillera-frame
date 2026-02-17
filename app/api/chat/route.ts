@@ -4,6 +4,12 @@ import { NATILLERAS } from "@/lib/natilleras";
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "https://frontend-neon-nine-31.vercel.app",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
 const FALLBACK_DATA: NatilleraData[] = [
   { name: "Natillera Colombia", contributionAmount: "10.0", currentRound: 1, totalRounds: 4, status: "Activa", statusCode: 1, nextRecipient: "0x0000000000000000000000000000000000000000" },
   { name: "Ahorro Semanal Medellín", contributionAmount: "5.0", currentRound: 1, totalRounds: 4, status: "Activa", statusCode: 1, nextRecipient: "0x0000000000000000000000000000000000000000" },
@@ -63,6 +69,10 @@ INSTRUCCIONES:
 - Puedes recomendar verificar en Celoscan o en el frontend`;
 }
 
+export async function OPTIONS() {
+  return NextResponse.json({}, { headers: CORS_HEADERS });
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { message } = await req.json();
@@ -119,12 +129,12 @@ export async function POST(req: NextRequest) {
       data.choices?.[0]?.message?.content ??
       "Lo siento, no pude procesar tu pregunta.";
 
-    return NextResponse.json({ reply });
+    return NextResponse.json({ reply }, { headers: CORS_HEADERS });
   } catch (error) {
     console.error("Chat error:", error);
     return NextResponse.json(
       { reply: "Lo siento, hubo un error. Por favor intenta de nuevo." },
-      { status: 200 },
+      { status: 200, headers: CORS_HEADERS },
     );
   }
 }
