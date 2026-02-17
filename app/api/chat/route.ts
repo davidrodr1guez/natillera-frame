@@ -76,7 +76,7 @@ export async function OPTIONS() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { message } = await req.json();
+    const { message, history = [] } = await req.json();
 
     if (!message || typeof message !== "string") {
       return NextResponse.json({ error: "Message required" }, { status: 400 });
@@ -114,6 +114,7 @@ export async function POST(req: NextRequest) {
         model: "llama-3.3-70b-versatile",
         messages: [
           { role: "system", content: systemPrompt },
+          ...history.slice(-10), // last 10 messages for context, avoid token overflow
           { role: "user", content: message },
         ],
         max_tokens: 400,
